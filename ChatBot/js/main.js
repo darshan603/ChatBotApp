@@ -22,6 +22,7 @@ var arrayOfPissibleMessage = [
     { "message": "How are you", "response": "I'm Good" },
     { "message": "how are you", "response": "I'm Good" },
     { "message": "how are u", "response": "I'm Fine" },
+    { "message": "what’s up", "response": "Nothing" },
     { "message": "hi", "response": "hi" },
     { "message": "Hi", "response": "hi" },
     { "message": "who are you", "response": "I'm your assistant" },
@@ -31,6 +32,12 @@ var arrayOfPissibleMessage = [
     { "message": "today's date", "response": getDate() },
     { "message": "today is", "response": getDate() },
     { "message": "today date", "response": getDate() },
+    { "message": "good morning", "response": "Good Morning !! Have a grate day !!" },
+    { "message": "thank you", "response": "Thank you !!" },
+    { "message": "are you single", "response": "Yes !! I'm single" },
+    { "message": "do you know a joke", "response": "You’re funny!" },
+    { "message": "you’re smart", "response": "Wow !! You too" },
+    { "message": "you are smart", "response": "Wow !! You too" },
 ];
 
 
@@ -47,12 +54,46 @@ function chatbotSendMessage(messageText) {
     messageElement.style.margin = "10px";
     messageElement.style.padding = "5px";
 
+    const botimg = document.createElement("img");
+    //botimg.setAttribute("src", "./image/smily.png");
+
     messageElement.innerHTML = "<span>Chatbot :</span>" +
         "<span style=" + "margin-top:10px; padding:10px" + ">" + messageText + "</span>";
 
     messageElement.animate([{ easing: "ease-in", opacity: 0.4 }, { opacity: 1 }], { duration: 1000 });
 
+    if (user.message == "Good Morning") {
+        botimg.setAttribute("src", "./image/smily.png");
+        messageElement.appendChild(botimg);
+    }
+    if (user.message == "good morning") {
+        botimg.setAttribute("src", "./image/smily.png");
+        messageElement.appendChild(botimg);
+    }
+    if (user.message.trim() == "thank you") {
+        botimg.setAttribute("src", "./image/present.png");
+        messageElement.appendChild(botimg);
+    }
+    if (user.message.trim() == "are you single") {
+        botimg.setAttribute("src", "./image/sad-face.png");
+        messageElement.appendChild(botimg);
+    }
+    if (user.message.trim() == "do you know a joke") {
+        botimg.setAttribute("src", "./image/funny.png");
+        messageElement.appendChild(botimg);
+    }
+    if (user.message.trim() == "you’re smart") {
+        botimg.setAttribute("src", "./image/surprised.png");
+        messageElement.appendChild(botimg);
+    }
+    if (user.message.trim() == "you are smart") {
+        botimg.setAttribute("src", "./image/surprised.png");
+        messageElement.appendChild(botimg);
+    }
+
+
     chatContainer.appendChild(messageElement);
+
 
     chatContainer.scrollTop = chatContainer.scrollHeight;
 }
@@ -86,9 +127,10 @@ sendBtn.addEventListener('click', function (e) {
         user.message = messageText;
         sendMessage(messageText);
         textbox.value = "";
+        procesMessage();
     }
 
-    procesMessage();
+
 
 });
 
@@ -111,7 +153,7 @@ function procesMessage() {
         }
 
     }
-    else if (user.message == "how" || user.message == "who") {
+    else if (user.message == "how" || user.message == "who" || user.message == "hey") {
         setTimeout(function () {
             chatbotSendMessage(" ?");
         }, 1000);
