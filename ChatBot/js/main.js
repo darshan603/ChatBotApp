@@ -14,24 +14,18 @@ async function getBranchDetails() {
 
     jsonData.map((data) =>
       arrayOfPossibleMessage.push({
-        message: `phone number of  ${data.branchName} branch?`,
+        message: `phone number of ${data.branchName} branch`,
         response: ` ${data.phoneNumber}`,
       })
     );
 
     jsonData.map((data) =>
       arrayOfPossibleMessage.push({
-        message: `contact number of ${data.branchName} branch?`,
+        message: `contact number of ${data.branchName} branch`,
         response: ` ${data.phoneNumber}`,
       })
     );
 
-    jsonData.map((data) =>
-      arrayOfPossibleMessage.push({
-        message: `contact number of ${data.branchName} branch?`,
-        response: ` ${data.phoneNumber}`,
-      })
-    );
   } catch (e) {
     console.log(e);
   }
@@ -96,42 +90,32 @@ function getDate() {
 
 var arrayOfPossibleMessage = [
   { message: "How are you", response: "I'm Good" },
-  {
-    message: "course details",
-    response: courseArray,
-  },
-  {
-    message: "branches details",
-    response: branchesArray,
-  },
-  { message: "how are you?", response: "I'm Good" },
-  { message: "how are u?", response: "I'm Fine" },
-  { message: "hi", response: "hi" },
-  //   { message: "Hi", response: "hi" },
-  { message: "who are you ?", response: "I'm your assistant" },
-  {
-    message: "Are you a robot?",
-    response:
-      "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you?",
-  },
-  {
-    message: "are you a robot?",
-    response:
-      "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you?",
-  },
-  {
-    message: "more details",
-    response: "<a href='https://esoft.lk/' target='_blank'>Click here</a>",
-  },
+  { message: "course details", response: courseArray },
+  { message: "what are the courses available in esoft ", response: courseArray },
+  { message: "what are the courses available", response: courseArray },
+  { message: "branches details", response: branchesArray },
+  { message: "how are you", response: "I'm Good" },
+  { message: "how are u", response: "I'm Fine" },
+  { message: "hi", response: "Hello! How can I assist you today?" },
+  { message: "who are you", response: "I'm your assistant" },
+  { message: "Are you a robot", response: "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you?" },
+  { message: "are you a robot", response: "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you?" },
+  { message: "more details", response: "<a href='https://esoft.lk/' target='_blank'>Click here</a>" },
   { message: "today's date", response: getDate() },
   { message: "today is", response: getDate() },
   { message: "today date", response: getDate() },
+  { message: "good morning", response: "Good Morning !! Have a grate day !!" },
+  { message: "thank you", response: "You're welcome! If you have any questions or if there's anything I can help you with, feel free to let me know." },
+  { message: "are you single", response: "Yes !! I'm single" },
+  { message: "do you know a joke", response: "You’re funny!" },
+  { message: "you’re smart", response: "Wow !! You too" },
+  { message: "you are smart", response: "Wow !! You too" },
 ];
 
 console.log(arrayOfPossibleMessage);
 
 setTimeout(function () {
-  chatbotSendMessage(" Hi, How can i help you ?");
+  chatbotSendMessage(" Hello! How can I assist you today?");
 }, 1000);
 
 function chatbotSendMessage(messageText) {
@@ -146,9 +130,9 @@ function chatbotSendMessage(messageText) {
   //botimg.setAttribute("src", "./image/smily.png");
 
   if (typeof messageText == "object") {
+    messageElement.innerHTML = "<span>Chatbot:</span> <br>";
     messageText.map((text, i) => {
       messageElement.innerHTML +=
-        "<span>Chatbot: </span>" +
         "<span style=" +
         "margin-top:10px; padding:10px" +
         ">" +
@@ -241,7 +225,7 @@ sendBtn.addEventListener('click', function (e) {
     procesMessage();
   }
 
-  procesMessage();
+  //procesMessage();
 });
 
 function procesMessage() {
@@ -270,10 +254,11 @@ function procesMessage() {
         chatbotSendMessage("I don't understand !!");
       }, 1000);
     }
-  } else if (user.message == "how" || user.message == "who") {
+  } else if (user.message == "how" || user.message == "who" || user.message == "bye") {
     setTimeout(function () {
-      chatbotSendMessage(" ?");
+      chatbotSendMessage(" mm");
     }, 1000);
+
   } else {
     setTimeout(function () {
       chatbotSendMessage("Please send me a complete sentence");
