@@ -156,31 +156,39 @@ function chatbotSendMessage(messageText) {
   );
 
   if (user.message == "Good Morning") {
-    botimg.setAttribute("src", "./image/smily.png");
+    //botimg.setAttribute("src", "./image/girl3.png");
+    //document.getElementById("imgid").src = "../ChatBot/image/girl3.png";
+    document.getElementById("imgid").src = "../ChatBot/image/boy2.png";
     messageElement.appendChild(botimg);
   }
   if (user.message == "good morning") {
-    botimg.setAttribute("src", "./image/smily.png");
+    //botimg.setAttribute("src", "./image/smily.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy2.png";
     messageElement.appendChild(botimg);
   }
   if (user.message.trim() == "thank you") {
-    botimg.setAttribute("src", "./image/present.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy2.png";
+    //botimg.setAttribute("src", "./image/present.png");
     messageElement.appendChild(botimg);
   }
   if (user.message.trim() == "are you single") {
-    botimg.setAttribute("src", "./image/sad-face.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy3.png";
+    //botimg.setAttribute("src", "./image/sad-face.png");
     messageElement.appendChild(botimg);
   }
   if (user.message.trim() == "do you know a joke") {
-    botimg.setAttribute("src", "./image/funny.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy5.png";
+    //botimg.setAttribute("src", "./image/funny.png");
     messageElement.appendChild(botimg);
   }
   if (user.message.trim() == "you’re smart") {
-    botimg.setAttribute("src", "./image/surprised.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy4.png";
+    //botimg.setAttribute("src", "./image/surprised.png");
     messageElement.appendChild(botimg);
   }
   if (user.message.trim() == "you are smart") {
-    botimg.setAttribute("src", "./image/surprised.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy4.png";
+    //botimg.setAttribute("src", "./image/surprised.png");
     messageElement.appendChild(botimg);
   }
 
