@@ -2,7 +2,7 @@ var sendBtn = document.getElementById("sendBtn");
 var textbox = document.getElementById("textbox");
 var chatContainer = document.getElementById("chatContainer");
 
-var user = { message: "" };
+var user = { message: "", counter: 0 };
 let courseArray = [];
 let branchesArray = [];
 
@@ -25,7 +25,6 @@ async function getBranchDetails() {
         response: ` ${data.phoneNumber}`,
       })
     );
-
   } catch (e) {
     console.log(e);
   }
@@ -50,8 +49,6 @@ async function getCourseDetails() {
 
 getCourseDetails();
 getBranchDetails();
-
-console.log(branchesArray);
 
 function getDate() {
   var date = new Date();
@@ -89,45 +86,72 @@ function getDate() {
 }
 
 var arrayOfPossibleMessage = [
-  { message: "How are you", response: "I'm Good" },
+  {
+    message: "How are you",
+    response: ["iam good", "iam 5n", "res3", "res4"],
+  },
   { message: "course details", response: courseArray },
-  { message: "what are the courses available in esoft ", response: courseArray },
+  {
+    message: "what are the courses available in esoft ",
+    response: courseArray,
+  },
   { message: "what are the courses available", response: courseArray },
   { message: "branches details", response: branchesArray },
   { message: "how are you", response: "I'm Good" },
   { message: "how are u", response: "I'm Fine" },
-  { message: "hi", response: "Hello! How can I assist you today?" },
+  {
+    message: "hi",
+    response: ["Hello! How can I assist you today?", "res2", "res3", "res4"],
+  },
+
   { message: "who are you", response: "I'm your assistant" },
-  { message: "Are you a robot", response: "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you?" },
-  { message: "are you a robot", response: "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you?" },
-  { message: "more details", response: "<a href='https://esoft.lk/' target='_blank'>Click here</a>" },
+  // `bye ${questionsToAsk[0].answer}... nice to meet you`
+
+  {
+    message: "are you a robot",
+    response:
+      "Yes I am a robot, but I’m a good one. Let me prove it. How can I help you ",
+  },
+  {
+    message: "more details",
+    response: "<a href='https://esoft.lk/' target='_blank'>Click here</a>",
+  },
   { message: "today's date", response: getDate() },
   { message: "today is", response: getDate() },
   { message: "today date", response: getDate() },
   { message: "good morning", response: "Good Morning !! Have a grate day !!" },
-  { message: "thank you", response: "You're welcome! If you have any questions or if there's anything I can help you with, feel free to let me know." },
+  // {
+  //   message: "thank you",
+  //   response:
+  //     "You're welcome! If you have any questions or if there's anything I can help you with, feel free to let me know.",
+  // },
   { message: "are you single", response: "Yes !! I'm single" },
   { message: "do you know a joke", response: "You’re funny!" },
   { message: "you’re smart", response: "Wow !! You too" },
-  { message: "you are smart", response: "Wow !! You too" },
 ];
 
-console.log(arrayOfPossibleMessage);
+var questionsToAsk = [{ question: "what is your name?", answer: "" }];
 
-setTimeout(function () {
-  chatbotSendMessage(" Hello! How can I assist you today?");
-}, 1000);
+askQuestion();
+
+function askQuestion() {
+  if (questionsToAsk.length > user.counter) {
+    setTimeout(function () {
+      chatbotSendMessage(questionsToAsk[user.counter].question);
+      user.counter++;
+    }, 1000);
+  }
+}
 
 function chatbotSendMessage(messageText) {
-  var messageElement = document.createElement('div');
-  messageElement.classList.add('w-50');
-  messageElement.classList.add('float-left');
-  messageElement.classList.add('shadow-sm');
+  var messageElement = document.createElement("div");
+  messageElement.classList.add("w-50");
+  messageElement.classList.add("float-left");
+  messageElement.classList.add("shadow-sm");
   messageElement.style.margin = "10px";
   messageElement.style.padding = "5px";
 
   const botimg = document.createElement("img");
-  //botimg.setAttribute("src", "./image/smily.png");
 
   if (typeof messageText == "object") {
     messageElement.innerHTML = "<span>Chatbot:</span> <br>";
@@ -142,7 +166,7 @@ function chatbotSendMessage(messageText) {
     });
   } else {
     messageElement.innerHTML =
-      "<span>Chatbot:</span>" +
+      "<span>Chatbot : </span>" +
       "<span style=" +
       "margin-top:10px; padding:10px" +
       ">" +
@@ -154,40 +178,7 @@ function chatbotSendMessage(messageText) {
     [{ easing: "ease-in", opacity: 0.4 }, { opacity: 1 }],
     { duration: 1000 }
   );
-
-  if (user.message == "Good Morning") {
-    botimg.setAttribute("src", "./image/smily.png");
-    messageElement.appendChild(botimg);
-  }
-  if (user.message == "good morning") {
-    botimg.setAttribute("src", "./image/smily.png");
-    messageElement.appendChild(botimg);
-  }
-  if (user.message.trim() == "thank you") {
-    botimg.setAttribute("src", "./image/present.png");
-    messageElement.appendChild(botimg);
-  }
-  if (user.message.trim() == "are you single") {
-    botimg.setAttribute("src", "./image/sad-face.png");
-    messageElement.appendChild(botimg);
-  }
-  if (user.message.trim() == "do you know a joke") {
-    botimg.setAttribute("src", "./image/funny.png");
-    messageElement.appendChild(botimg);
-  }
-  if (user.message.trim() == "you’re smart") {
-    botimg.setAttribute("src", "./image/surprised.png");
-    messageElement.appendChild(botimg);
-  }
-  if (user.message.trim() == "you are smart") {
-    botimg.setAttribute("src", "./image/surprised.png");
-    messageElement.appendChild(botimg);
-  }
-
-
   chatContainer.appendChild(messageElement);
-
-
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
@@ -212,20 +203,27 @@ function sendMessage(messageText) {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-sendBtn.addEventListener('click', function (e) {
-
+sendBtn.addEventListener("click", function (e) {
   if (textbox.value == "") {
-    alert('Please type in a message');
-  }
-  else {
-    let messageText = textbox.value.trim();
+    alert("Please type in a message");
+  } else {
+    let messageText = textbox.value.trim().toLocaleLowerCase();
     user.message = messageText;
     sendMessage(messageText);
     textbox.value = "";
-    procesMessage();
+    if (questionsToAsk[0].answer == "") {
+      questionsToAsk[user.counter - 1].answer = user.message;
+      console.log("empty answer");
+      questionsToAsk.push({
+        question: `hi ${user.message}. How can i help you`,
+        answer: "",
+      });
+    }
+
+    askQuestion();
   }
 
-  //procesMessage();
+  procesMessage();
 });
 
 function procesMessage() {
@@ -240,28 +238,40 @@ function procesMessage() {
       val.message.includes(user.message.toLocaleLowerCase())
     );
 
-    // console.log(result);
     if (result.length > 0) {
       var response = result[0].response;
 
-      //   console.log(response);
+      var num = Math.floor(Math.random() * response.length);
 
+      if (typeof response == "object" && user.message == "hi") {
+        console.log(num);
+        chatbotSendMessage(response[num]);
+      } else {
+        setTimeout(function () {
+          chatbotSendMessage(response);
+        }, 500);
+      }
+
+      console.log(typeof response, user.message, response.length);
+    } else if (user.message == "thank you") {
       setTimeout(function () {
-        chatbotSendMessage(response);
-      }, 500);
-    } else {
-      setTimeout(function () {
-        chatbotSendMessage("I don't understand !!");
+        // chatbotSendMessage("I don't understand !!");
       }, 1000);
     }
-  } else if (user.message == "how" || user.message == "who" || user.message == "bye") {
+  } else if (
+    // user.message == "how" ||
+    // user.message == "who" ||
+    user.message == "bye"
+  ) {
     setTimeout(function () {
-      chatbotSendMessage(" mm");
-    }, 1000);
+      // chatbotSendMessage(`welcom ${questionsToAsk[0].answer}... `);
 
-  } else {
+      chatbotSendMessage(`bye ${questionsToAsk[0].answer}... nice to meet you`);
+    }, 1000);
+  } else if (user.message == "thankyou") {
     setTimeout(function () {
-      chatbotSendMessage("Please send me a complete sentence");
+      chatbotSendMessage(`bye ${questionsToAsk[0].answer}... nice to meet you`);
+      // chatbotSendMessage("Please send me a complete sentence");
     }, 1000);
   }
 }
@@ -275,6 +285,15 @@ textbox.addEventListener("keypress", function (e) {
       user.message = messageText;
       sendMessage(user.message);
       textbox.value = "";
+      if (questionsToAsk[0].answer == "") {
+        questionsToAsk[user.counter - 1].answer = user.message;
+        console.log("empty answer");
+        questionsToAsk.push({
+          question: `hi ${user.message}. How can i help you`,
+          answer: "",
+        });
+      }
+      askQuestion();
     }
 
     procesMessage();
