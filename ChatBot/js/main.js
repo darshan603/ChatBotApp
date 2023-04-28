@@ -178,6 +178,45 @@ function chatbotSendMessage(messageText) {
     [{ easing: "ease-in", opacity: 0.4 }, { opacity: 1 }],
     { duration: 1000 }
   );
+
+  if (user.message == "Good Morning") {
+    //botimg.setAttribute("src", "./image/girl3.png");
+    //document.getElementById("imgid").src = "../ChatBot/image/girl3.png";
+    document.getElementById("imgid").src = "../ChatBot/image/boy2.png";
+    messageElement.appendChild(botimg);
+  }
+  if (user.message == "good morning") {
+    //botimg.setAttribute("src", "./image/smily.png");
+    document.getElementById("imgid").src = "../ChatBot/image/boy2.png";
+    messageElement.appendChild(botimg);
+  }
+  if (user.message.trim() == "thank you") {
+    document.getElementById("imgid").src = "../ChatBot/image/boy2.png";
+    //botimg.setAttribute("src", "./image/present.png");
+    messageElement.appendChild(botimg);
+  }
+  if (user.message.trim() == "are you single") {
+    document.getElementById("imgid").src = "../ChatBot/image/boy3.png";
+    //botimg.setAttribute("src", "./image/sad-face.png");
+    messageElement.appendChild(botimg);
+  }
+  if (user.message.trim() == "do you know a joke") {
+    document.getElementById("imgid").src = "../ChatBot/image/boy5.png";
+    //botimg.setAttribute("src", "./image/funny.png");
+    messageElement.appendChild(botimg);
+  }
+  if (user.message.trim() == "you’re smart") {
+    document.getElementById("imgid").src = "../ChatBot/image/boy4.png";
+    //botimg.setAttribute("src", "./image/surprised.png");
+    messageElement.appendChild(botimg);
+  }
+  if (user.message.trim() == "you are smart") {
+    document.getElementById("imgid").src = "../ChatBot/image/boy4.png";
+    //botimg.setAttribute("src", "./image/surprised.png");
+    messageElement.appendChild(botimg);
+  }
+
+
   chatContainer.appendChild(messageElement);
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
